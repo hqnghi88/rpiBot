@@ -1,0 +1,1 @@
+from google import googlenum_page = 1search_results = google.search("what is your name?", num_page)print search_results[1].description 

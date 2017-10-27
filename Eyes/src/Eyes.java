@@ -130,9 +130,9 @@ public class Eyes extends JFrame implements Runnable {
 				newstate = t;
 				threshold = 100;
 
-				g.fillRect((int) ((l + 20) * scalex), (int) (100 * scaley), (int) (100 * scalex), (int) (300 * scaley));
-				g.fillRect((int) ((l + 50) * scalex), (int) (100 * scaley), (int) (600 * scalex), (int) (100 * scaley));
-				g.fillRect((int) ((l + 650) * scalex), (int) (100 * scaley), (int) (100 * scalex),
+				g.fillRect((int) ((l + 50) * scalex), (int) (100 * scaley), (int) (50 * scalex), (int) (300 * scaley));
+				g.fillRect((int) ((l + 50) * scalex), (int) (100 * scaley), (int) (600 * scalex), (int) (50 * scaley));
+				g.fillRect((int) ((l + 650) * scalex), (int) (100 * scaley), (int) (50 * scalex),
 						(int) (300 * scaley));
 
 				ispaused = true;
@@ -182,7 +182,7 @@ public class Eyes extends JFrame implements Runnable {
 			// (800 * scalex), (int) (800 * scaley));
 			g.setColor(Color.WHITE);
 			int l = center;
-			if (threshold < 200) {
+			if (threshold < 300) {
 				g.fillRect((int) ((l + 150 + (dir * threshold)) * scalex), (int) ((200) * scaley), (int) (500 * scalex),
 						(int) (300 * scaley));
 				threshold += animation;
@@ -190,7 +190,7 @@ public class Eyes extends JFrame implements Runnable {
 				String t = state;
 				state = newstate;
 				newstate = t;
-				threshold = 200;
+				threshold = 300;
 
 				g.fillRect((int) ((l + 150 + (dir * threshold)) * scalex), (int) ((200) * scaley), (int) (500 * scalex),
 						(int) (300 * scaley));
@@ -320,14 +320,14 @@ public class Eyes extends JFrame implements Runnable {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		eyes.setSize(screenSize);
 
-//		eyes.setSize(320, 240);
+		eyes.setSize(320, 240);
 		eyes.left.scalex = eyes.getWidth() / 1920.0;
 		eyes.left.scaley = eyes.getHeight() / 1080.0;
 
 		eyes.right.scalex = eyes.getWidth() / 1920.0;
 		eyes.right.scaley = eyes.getHeight() / 1080.0;
-		 eyes.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		 eyes.setUndecorated(true);
+//		 eyes.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//		 eyes.setUndecorated(true);
 		eyes.setVisible(true);
 		// eyes.left.g=eyes.myPane.getGraphics().create();
 		// eyes.right.g=eyes.myPane.getGraphics().create();
