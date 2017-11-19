@@ -1,4 +1,4 @@
-package RPiBot;
+package RPiBot.Faces;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;

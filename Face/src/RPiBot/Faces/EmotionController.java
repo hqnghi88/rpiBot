@@ -1,4 +1,4 @@
-package RPiBot;
+package RPiBot.Faces;
 
 public class EmotionController {
 
