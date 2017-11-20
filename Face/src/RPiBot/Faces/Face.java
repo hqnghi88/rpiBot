@@ -12,7 +12,7 @@ public class Face {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		eyes.setSize(screenSize);
 
-		eyes.setSize(320, 240);
+		eyes.setSize(620, 240);
 		eyes.left.scalex = eyes.getWidth() / 1920.0;
 		eyes.left.scaley = eyes.getHeight() / 1080.0;
 
