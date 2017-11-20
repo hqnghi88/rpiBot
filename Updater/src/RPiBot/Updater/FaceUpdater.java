@@ -43,7 +43,7 @@ public class FaceUpdater implements Runnable {
 					if (myP != null) {
 						myP.destroy();
 					}
-					p = Runtime.getRuntime().exec("cmd /c \"cd D:\\GitHub\\rpiBot\\Face\\ && mvn install \"");
+					p = Runtime.getRuntime().exec("cmd /c \"cd D:\\GitHub\\rpiBot\\Face\\ && mvn install -q\"");
 					input = new BufferedReader(new InputStreamReader(p.getInputStream()));
 					while ((line = input.readLine()) != null) {
 						System.out.println(line);
