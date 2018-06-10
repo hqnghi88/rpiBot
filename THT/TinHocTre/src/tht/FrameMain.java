@@ -79,7 +79,7 @@ public class FrameMain extends JFrame {
 		}
 		return count;
 	}
-	public void differof() {
+	public boolean differof() {
 		int[] sum = new int[16];
 		for (int i = 0; i < 16; i++)
 			sum[i] = 0;
@@ -147,11 +147,13 @@ public class FrameMain extends JFrame {
 			// System.out.println();
 			// +e[K-8][x]+"\t"+e2[K-8][x]+"\t\t\t"+e[x][7]+"\t"+e2[x][7]+"\t\t\t"+e[x][K-8]+"\t"+e2[x][K-8]);
 		}
+		boolean ff=false;
 		for (int i = 0; i < 16; i++) {
-			if(sum[i]>maxi)
-			System.out.print(sum[i]+" ");
+			if(sum[i]>maxi) ff=true;
+//			System.out.print(sum[i]+" ");
 		}
-		System.out.println();
+//		System.out.println();
+		return ff;
 	}
 	public FrameMain() {
 		readInfo();
@@ -171,13 +173,18 @@ public class FrameMain extends JFrame {
 				checkAnImage(new File("D:\\ThiSinh\\input" + numberTest + "\\" + i + ".bmp"));
 				System.out.println("Done " + i);
 			}
-			e = (int[][]) foundEdge.get(X - 1);
-			for(int i=0; i<N;i++) {
-				if(i==X-1) continue;
-				e2 = (int[][]) foundEdge.get(i);
-				System.out.println(i+1);
-				differof();
-			}
+			visited[X-1]=1;foundpiece=1;
+			dfs(X-1);
+			for(int i=0; i<N; i++)System.out.print (visited[i]+" ");
+//			e = (int[][]) foundEdge.get(X - 1);
+//			int chose=-1;
+//			for(int i=0; i<N;i++) {
+//				if(i==X-1) continue;
+//				e2 = (int[][]) foundEdge.get(i);
+//				System.out.println(i+1);
+//				if(differof()) chose=i;
+//			}
+//			if(chose>-1) visited[chose]=1;
 			// System.out.println();
 			//
 			// System.out.println();
@@ -199,7 +206,22 @@ public class FrameMain extends JFrame {
 			e.printStackTrace();
 		}
 	}
-
+	int foundpiece=0;
+	public void dfs(int theX) {
+		e = (int[][]) foundEdge.get(theX);
+		int chose=-1;
+		for(int i=0; i<N;i++) {
+			if(i==theX || visited[i]>0) continue;
+			e2 = (int[][]) foundEdge.get(i);
+//			System.out.println(i+1);
+			if(differof()) chose=i;
+		}
+		if(chose>-1) {
+			foundpiece++;
+			visited[chose]=foundpiece;
+			if(foundpiece<R*C)dfs(chose);
+		}
+	}
 	public void checkAnImage(File f) throws Exception {
 
 		// matrix = create2DIntMatrixFromFile(f.toPath());
@@ -306,6 +328,6 @@ public class FrameMain extends JFrame {
 		FrameMain f = new FrameMain();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setSize(1480, 820);
-		f.setVisible(true);
+//		f.setVisible(true);
 	}
 }
