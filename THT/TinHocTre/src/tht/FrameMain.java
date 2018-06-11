@@ -24,13 +24,13 @@ public class FrameMain extends JFrame {
 	CannyEdgeDetector detector = new CannyEdgeDetector();
 	public int[][] matrix;
 	ArrayList foundEdge = new ArrayList<>();
-	public int[][] e, e2;
+	// public int[][] e, e2;
 
 	public int[] used;
 	public int[][] visited;
 	public int maxi = -9999;
 
-	public int around(int f, int fixed, int u) {
+	public int around(int[][] e, int[][] e2, int f, int fixed, int u) {
 		int count = 0;
 		int thres = 2;
 		if (f == 0) {
@@ -84,8 +84,7 @@ public class FrameMain extends JFrame {
 		return count;
 	}
 
-	
-	public int differof(int direction) {
+	public int differof(int[][] e, int[][] e2, int direction) {
 		int[] sum = new int[16];
 		for (int i = 0; i < 16; i++)
 			sum[i] = 0;
@@ -94,46 +93,46 @@ public class FrameMain extends JFrame {
 		for (int u = 0; u < K; u++) {
 			// if(e[7][x]==-1 && e2[7][x]==-1) sum[0]++;
 			if (direction == 0) {
-				if (around(0, bound, u) > rthres && around(2, bound, K - u) > rthres)
+				if (around(e, e2, 0, bound, u) > rthres && around(e, e2, 2, bound, K - u) > rthres)
 					sum[0]++;
-				if (around(0, bound, u) > rthres && around(2, K - bound - 1, u) > rthres)
+				if (around(e, e2, 0, bound, u) > rthres && around(e, e2, 2, K - bound - 1, u) > rthres)
 					sum[1]++;
-				if (around(0, bound, u) > rthres && around(3, bound, u) > rthres)
+				if (around(e, e2, 0, bound, u) > rthres && around(e, e2, 3, bound, u) > rthres)
 					sum[2]++;
-				if (around(0, bound, u) > rthres && around(3, K - bound - 1, K - u) > rthres)
+				if (around(e, e2, 0, bound, u) > rthres && around(e, e2, 3, K - bound - 1, K - u) > rthres)
 					sum[3]++;
 			}
 
 			if (direction == 1) {
-				if (around(0, K - bound - 1, u) > rthres && around(2, bound, u) > rthres)
+				if (around(e, e2, 0, K - bound - 1, u) > rthres && around(e, e2, 2, bound, u) > rthres)
 					sum[4]++;
-				if (around(0, K - bound - 1, u) > rthres && around(2, K - bound - 1, K - u) > rthres)
+				if (around(e, e2, 0, K - bound - 1, u) > rthres && around(e, e2, 2, K - bound - 1, K - u) > rthres)
 					sum[5]++;
-				if (around(0, K - bound - 1, u) > rthres && around(3, bound, K - u) > rthres)
+				if (around(e, e2, 0, K - bound - 1, u) > rthres && around(e, e2, 3, bound, K - u) > rthres)
 					sum[6]++;
-				if (around(0, K - bound - 1, u) > rthres && around(3, K - bound - 1, u) > rthres)
+				if (around(e, e2, 0, K - bound - 1, u) > rthres && around(e, e2, 3, K - bound - 1, u) > rthres)
 					sum[7]++;
 			}
 
 			if (direction == 2) {
-				if (around(1, bound, u) > rthres && around(2, bound, u) > rthres)
+				if (around(e, e2, 1, bound, u) > rthres && around(e, e2, 2, bound, u) > rthres)
 					sum[8]++;
-				if (around(1, bound, u) > rthres && around(2, K - bound - 1, K - u) > rthres)
+				if (around(e, e2, 1, bound, u) > rthres && around(e, e2, 2, K - bound - 1, K - u) > rthres)
 					sum[9]++;
-				if (around(1, bound, u) > rthres && around(3, bound, K - u) > rthres)
+				if (around(e, e2, 1, bound, u) > rthres && around(e, e2, 3, bound, K - u) > rthres)
 					sum[10]++;
-				if (around(1, bound, u) > rthres && around(3, K - bound - 1, u) > rthres)
+				if (around(e, e2, 1, bound, u) > rthres && around(e, e2, 3, K - bound - 1, u) > rthres)
 					sum[11]++;
 			}
 
 			if (direction == 3) {
-				if (around(1, K - bound - 1, u) > rthres && around(2, bound, K - u) > rthres)
+				if (around(e, e2, 1, K - bound - 1, u) > rthres && around(e, e2, 2, bound, K - u) > rthres)
 					sum[12]++;
-				if (around(1, K - bound - 1, u) > rthres && around(2, K - bound - 1, u) > rthres)
+				if (around(e, e2, 1, K - bound - 1, u) > rthres && around(e, e2, 2, K - bound - 1, u) > rthres)
 					sum[13]++;
-				if (around(1, K - bound - 1, u) > rthres && around(3, bound, u) > rthres)
+				if (around(e, e2, 1, K - bound - 1, u) > rthres && around(e, e2, 3, bound, u) > rthres)
 					sum[14]++;
-				if (around(1, K - bound - 1, u) > rthres && around(3, K - bound - 1, K - u) > rthres)
+				if (around(e, e2, 1, K - bound - 1, u) > rthres && around(e, e2, 3, K - bound - 1, K - u) > rthres)
 					sum[15]++;
 			}
 
@@ -178,8 +177,7 @@ public class FrameMain extends JFrame {
 		// setContentPane(contentP);
 		Container container = getContentPane();
 		container.setLayout(new GridLayout(1, 1));
-		JScrollPane scroll = new JScrollPane(contentP,
-				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+		JScrollPane scroll = new JScrollPane(contentP, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
 		scroll.setLayout(new ScrollPaneLayout());
@@ -190,19 +188,20 @@ public class FrameMain extends JFrame {
 		init();
 		setPreferredSize(new Dimension(800, 600)); // !! added
 		setSize(800, 600);
-//		setVisible(true);
+		// setVisible(true);
 	}
 
 	public void init() {
 
 		readInfo();
 		contentP.setLayout(new GridLayout(R, C));
-		used=new int[N];
-		for (int i = 0; i < N; i++) used[i]=0;
+		used = new int[N];
+		for (int i = 0; i < N; i++)
+			used[i] = 0;
 		visited = new int[R][C];
 		for (int i = 0; i < R; i++)
 			for (int j = 0; j < C; j++)
-			visited[i][j] = 0;
+				visited[i][j] = 0;
 		maxi = -9999;
 		matrix = new int[R][C];
 		for (int i = 0; i < R; i++) {
@@ -215,14 +214,13 @@ public class FrameMain extends JFrame {
 			// checkAnImage(new File("D:\\ThiSinh\\input"+numberTest+"\\" + X +
 			// ".txt"));
 			for (int i = 1; i <= N; i++) {
-				checkAnImage(new File("D:\\ThiSinh\\input" + numberTest + "\\"
-						+ i + ".bmp"));
+				checkAnImage(new File("D:\\ThiSinh\\input" + numberTest + "\\" + i + ".bmp"));
 				System.out.println("Done " + i);
 			}
 			foundpiece = 1;
-			visited[rX-1][cX-1]=X;
-			used[X-1]=1;
-			dfs(X - 1,rX-1,cX-1);
+			visited[rX - 1][cX - 1] = X;
+			used[X - 1] = 1;
+			dfs(X - 1, rX - 1, cX - 1);
 			// for(int i=0; i<N; i++)System.out.print (visited[i]+" ");
 
 			// e = (int[][]) foundEdge.get(X - 1);
@@ -261,13 +259,14 @@ public class FrameMain extends JFrame {
 	int foundpiece = 0;
 	int totalPoint = 0;
 	int tmpPoint = 0;
-	int[] dx= {1,-1,0,0};
-	int[] dy={0,0,1,-1};
-	public void dfs(int theX,int xp,int yp) {
+	int[] dx = { 1, -1, 0, 0 };
+	int[] dy = { 0, 0, 1, -1 };
+
+	public void dfs(int theX, int xp, int yp) {
 		if (foundpiece >= R * C) {
-			if(tmpPoint>totalPoint){				
+			if (tmpPoint > totalPoint) {
 				totalPoint = tmpPoint;
-				for (int i = 0; i < R; i++){				
+				for (int i = 0; i < R; i++) {
 					for (int j = 0; j < C; j++)
 						System.out.print(visited[i][j] + " ");
 					System.out.println();
@@ -277,48 +276,49 @@ public class FrameMain extends JFrame {
 			return;
 		}
 		// int maxtmp=0;
-		e = (int[][]) foundEdge.get(theX);
+		int[][] e = (int[][]) foundEdge.get(theX);
 		// int chose=-1;
-		
-		for(int i=0;i<4;i++){
-			if(xp+dx[i]>=0 && xp+dx[i]<R && yp+dy[i]>=0 && yp+dy[i]<C){
-				if(visited[xp+dx[i]][yp+dy[i]]==0){					
-					for (int j = 0; j < N;j++) {
-						if (j == theX || used[j] > 0)continue;	
-						e2 = (int[][]) foundEdge.get(j);
-						int tmp = differof(i);
+
+		for (int i = 0; i < 4; i++) {
+			if (xp + dx[i] >= 0 && xp + dx[i] < R && yp + dy[i] >= 0 && yp + dy[i] < C) {
+				if (visited[xp + dx[i]][yp + dy[i]] == 0) {
+					for (int j = 0; j < N; j++) {
+						if (j == theX || used[j] > 0)
+							continue;
+						int[][] e2 = (int[][]) foundEdge.get(j);
+						int tmp = differof(e, e2, i);
 						foundpiece++;
 						used[j] = foundpiece;
-						visited[xp+dx[i]][yp+dy[i]]=j+1;
+						visited[xp + dx[i]][yp + dy[i]] = j + 1;
 						tmpPoint += tmp;
-						dfs(j,xp+dx[i],yp+dy[i]);
+						dfs(j, xp + dx[i], yp + dy[i]);
 						tmpPoint -= tmp;
 						foundpiece--;
-						used[j] = 0;					
-						visited[xp+dx[i]][yp+dy[i]]=0;
-						
+						used[j] = 0;
+						visited[xp + dx[i]][yp + dy[i]] = 0;
+
 					}
 				}
 			}
 		}
-		
-//		for (int i = 0; i < N; i++) {
-//			if (i == theX || visit[i] > 0)
-//				continue;
-//			e2 = (int[][]) foundEdge.get(i);
-//			// System.out.println(i+1);
-//			int tmp = differof();
-//			foundpiece++;
-//			visited[i] = foundpiece;
-////			if (totalPoint < tmpPoint + tmp) {
-//				tmpPoint += tmp;
-////				dfs(i);
-//				tmpPoint -= tmp;
-//				foundpiece--;
-//				visited[i] = 0;
-////			}
-//			// if(tmp>0) {chose=i;maxtmp=tmp;}
-//		}
+
+		// for (int i = 0; i < N; i++) {
+		// if (i == theX || visit[i] > 0)
+		// continue;
+		// e2 = (int[][]) foundEdge.get(i);
+		// // System.out.println(i+1);
+		// int tmp = differof();
+		// foundpiece++;
+		// visited[i] = foundpiece;
+		//// if (totalPoint < tmpPoint + tmp) {
+		// tmpPoint += tmp;
+		//// dfs(i);
+		// tmpPoint -= tmp;
+		// foundpiece--;
+		// visited[i] = 0;
+		//// }
+		// // if(tmp>0) {chose=i;maxtmp=tmp;}
+		// }
 		// if(chose>-1) {
 		// foundpiece++;
 		// visited[chose]=foundpiece;
@@ -364,8 +364,7 @@ public class FrameMain extends JFrame {
 		// this.getContentPane().setLayout(new GridLayout(3, 3));
 		imageLabel.setLocation(0, 0);
 		imageLabel.setSize(150, 150);
-		ImageIcon imageIcon = new ImageIcon(image.getImage().getScaledInstance(
-				150, 150, Image.SCALE_SMOOTH));
+		ImageIcon imageIcon = new ImageIcon(image.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
 		imageLabel.setIcon(imageIcon);
 		imageLabel.setVisible(true);
 	}
@@ -398,8 +397,7 @@ public class FrameMain extends JFrame {
 	public void readInfo() {
 		Scanner scanner;
 		try {
-			scanner = new Scanner(new File("D:\\ThiSinh\\input" + numberTest
-					+ "\\info.txt"));
+			scanner = new Scanner(new File("D:\\ThiSinh\\input" + numberTest + "\\info.txt"));
 			int[] t = new int[100];
 			int i = 0;
 			while (scanner.hasNextInt()) {
@@ -430,13 +428,9 @@ public class FrameMain extends JFrame {
 
 	}
 
-	static public int[][] create2DIntMatrixFromFile(Path path)
-			throws IOException {
-		return Files
-				.lines(path)
-				.map((l) -> l.trim().split("\\s+"))
-				.map((sa) -> Stream.of(sa).mapToInt(Integer::parseInt)
-						.toArray()).toArray(int[][]::new);
+	static public int[][] create2DIntMatrixFromFile(Path path) throws IOException {
+		return Files.lines(path).map((l) -> l.trim().split("\\s+"))
+				.map((sa) -> Stream.of(sa).mapToInt(Integer::parseInt).toArray()).toArray(int[][]::new);
 	}
 
 	public static void main(String args[]) {
