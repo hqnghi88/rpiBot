@@ -1,5 +1,7 @@
 package tht;
 
+import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -23,105 +25,122 @@ public class FrameMain extends JFrame {
 	public int[][] matrix;
 	ArrayList foundEdge = new ArrayList<>();
 	public int[][] e, e2;
-	public int[] visited;
-	public int maxi=-9999;
 
-	public int around(int u, int f, int fn) {
+	public int[] used;
+	public int[][] visited;
+	public int maxi = -9999;
+
+	public int around(int f, int fixed, int u) {
 		int count = 0;
-		int thres=2;
+		int thres = 2;
 		if (f == 0) {
 			for (int i = 0; i < thres; i++) {
-				if (u - i >= 0 && e[fn][u - i] == -1) {
+				if (u - i >= 0 && e[fixed][u - i] == -1) {
 					count++;
 				}
 			}
 			for (int i = 1; i < thres; i++) {
-				if (u + i < K && e[fn][u + i] == -1) {
+				if (u + i < K && e[fixed][u + i] == -1) {
 					count++;
 				}
 			}
 		}
 		if (f == 1) {
 			for (int i = 0; i < thres; i++) {
-				if (u - i >= 0 && e[u - i][fn] == -1) {
+				if (u - i >= 0 && e[u - i][fixed] == -1) {
 					count++;
 				}
 			}
 			for (int i = 1; i < thres; i++) {
-				if (u + i < K && e[u + i][fn] == -1) {
+				if (u + i < K && e[u + i][fixed] == -1) {
 					count++;
 				}
 			}
 		}
 		if (f == 2) {
 			for (int i = 0; i < thres; i++) {
-				if (u - i >= 0 && e2[fn][u - i] == -1) {
+				if (u - i >= 0 && e2[fixed][u - i] == -1) {
 					count++;
 				}
 			}
 			for (int i = 1; i < thres; i++) {
-				if (u + i < K && e2[fn][u + i] == -1) {
+				if (u + i < K && e2[fixed][u + i] == -1) {
 					count++;
 				}
 			}
 		}
 		if (f == 3) {
 			for (int i = 0; i < thres; i++) {
-				if (u - i >= 0 && e2[u - i][fn] == -1) {
+				if (u - i >= 0 && e2[u - i][fixed] == -1) {
 					count++;
 				}
 			}
 			for (int i = 1; i < thres; i++) {
-				if (u + i < K && e2[u + i][fn] == -1) {
+				if (u + i < K && e2[u + i][fixed] == -1) {
 					count++;
 				}
 			}
 		}
 		return count;
 	}
-	public boolean differof() {
+
+	public int differof() {
 		int[] sum = new int[16];
 		for (int i = 0; i < 16; i++)
 			sum[i] = 0;
 		int bound = 7;
-		int rthres=0;
+		int rthres = 0;
 		for (int u = 0; u < K; u++) {
 			// if(e[7][x]==-1 && e2[7][x]==-1) sum[0]++;
 
-			if (around(u, 0, bound) > rthres && around(u, 2, bound) > rthres)
+			if (around(0, bound, u) > rthres
+					&& around(2, bound, K - u) > rthres)
 				sum[0]++;
-			if (around(u, 0, bound) > rthres && around(u, 2, K - bound - 1) > rthres)
+			if (around(0, bound, u) > rthres
+					&& around(2, K - bound - 1, u) > rthres)
 				sum[1]++;
-			if (around(u, 0, bound) > rthres && around(u, 3, bound) > rthres)
+			if (around(0, bound, u) > rthres && around(3, bound, u) > rthres)
 				sum[2]++;
-			if (around(u, 0, bound) > rthres && around(u, 3, K - bound - 1) > rthres)
+			if (around(0, bound, u) > rthres
+					&& around(3, K - bound - 1, K - u) > rthres)
 				sum[3]++;
 
-			if (around(u, 0, K - bound - 1) > rthres && around(u, 2, bound) > rthres)
+			if (around(0, K - bound - 1, u) > rthres
+					&& around(2, bound, u) > rthres)
 				sum[4]++;
-			if (around(u, 0, K - bound - 1) > rthres && around(u, 2, K - bound - 1) > rthres)
+			if (around(0, K - bound - 1, u) > rthres
+					&& around(2, K - bound - 1, K - u) > rthres)
 				sum[5]++;
-			if (around(u, 0, K - bound - 1) > rthres && around(u, 3, bound) > rthres)
+			if (around(0, K - bound - 1, u) > rthres
+					&& around(3, bound, K - u) > rthres)
 				sum[6]++;
-			if (around(u, 0, K - bound - 1) > rthres && around(u, 3, K - bound - 1) > rthres)
+			if (around(0, K - bound - 1, u) > rthres
+					&& around(3, K - bound - 1, u) > rthres)
 				sum[7]++;
 
-			if (around(u, 1, bound) > rthres && around(u, 2, bound) > rthres)
+			if (around(1, bound, u) > rthres && around(2, bound, u) > rthres)
 				sum[8]++;
-			if (around(u, 1, bound) > rthres && around(u, 2, K - bound - 1) > rthres)
+			if (around(1, bound, u) > rthres
+					&& around(2, K - bound - 1, K - u) > rthres)
 				sum[9]++;
-			if (around(u, 1, bound) > rthres && around(u, 3, bound) > rthres)
+			if (around(1, bound, u) > rthres
+					&& around(3, bound, K - u) > rthres)
 				sum[10]++;
-			if (around(u, 1, bound) > rthres && around(u, 3, K - bound - 1) > rthres)
+			if (around(1, bound, u) > rthres
+					&& around(3, K - bound - 1, u) > rthres)
 				sum[11]++;
 
-			if (around(u, 1, K - bound - 1) > rthres && around(u, 2, bound) > rthres)
+			if (around(1, K - bound - 1, u) > rthres
+					&& around(2, bound, K - u) > rthres)
 				sum[12]++;
-			if (around(u, 1, K - bound - 1) > rthres && around(u, 2, K - bound - 1) > rthres)
+			if (around(1, K - bound - 1, u) > rthres
+					&& around(2, K - bound - 1, u) > rthres)
 				sum[13]++;
-			if (around(u, 1, K - bound - 1) > rthres && around(u, 3, bound) > rthres)
+			if (around(1, K - bound - 1, u) > rthres
+					&& around(3, bound, u) > rthres)
 				sum[14]++;
-			if (around(u, 1, K - bound - 1) > rthres && around(u, 3, K - bound - 1) > rthres)
+			if (around(1, K - bound - 1, u) > rthres
+					&& around(3, K - bound - 1, K - u) > rthres)
 				sum[15]++;
 
 			// System.out.print(e[7][x]+"\t"+e2[7][x]+"\t\t\t");
@@ -147,44 +166,82 @@ public class FrameMain extends JFrame {
 			// System.out.println();
 			// +e[K-8][x]+"\t"+e2[K-8][x]+"\t\t\t"+e[x][7]+"\t"+e2[x][7]+"\t\t\t"+e[x][K-8]+"\t"+e2[x][K-8]);
 		}
-		boolean ff=false;
+		int ff = -999;
 		for (int i = 0; i < 16; i++) {
-			if(sum[i]>maxi) ff=true;
-//			System.out.print(sum[i]+" ");
+			if (sum[i] > ff)
+				ff = sum[i];
+			// System.out.print(sum[i]+" ");
 		}
-//		System.out.println();
+		// System.out.println();
 		return ff;
 	}
+
+	public JPanel contentP;
+
 	public FrameMain() {
+		contentP = new JPanel();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// setContentPane(contentP);
+		Container container = getContentPane();
+		container.setLayout(new GridLayout(1, 1));
+		JScrollPane scroll = new JScrollPane(contentP,
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+		scroll.setLayout(new ScrollPaneLayout());
+
+		// 6. Add the scroll pane to the contentpane of JApplet.
+
+		container.add(scroll);
+		init();
+		setPreferredSize(new Dimension(800, 600)); // !! added
+		setSize(800, 600);
+//		setVisible(true);
+	}
+
+	public void init() {
+
 		readInfo();
-		visited=new int[N];
-		for(int i=0; i<N; i++)visited[i]=0;
-		maxi=-9999;
+		contentP.setLayout(new GridLayout(R, C));
+		used=new int[N];
+		for (int i = 0; i < N; i++) used[i]=0;
+		visited = new int[R][C];
+		for (int i = 0; i < R; i++)
+			for (int j = 0; j < C; j++)
+			visited[i][j] = 0;
+		maxi = -9999;
 		matrix = new int[R][C];
 		for (int i = 0; i < R; i++) {
 			for (int j = 0; j < C; j++) {
 				matrix[i][j] = -1;
 			}
 		}
-		matrix[rX][cX] = 1;
+		matrix[rX - 1][cX - 1] = 1;
 		try {
-			// checkAnImage(new File("D:\\ThiSinh\\input"+numberTest+"\\" + X + ".txt"));
+			// checkAnImage(new File("D:\\ThiSinh\\input"+numberTest+"\\" + X +
+			// ".txt"));
 			for (int i = 1; i <= N; i++) {
-				checkAnImage(new File("D:\\ThiSinh\\input" + numberTest + "\\" + i + ".bmp"));
+				checkAnImage(new File("D:\\ThiSinh\\input" + numberTest + "\\"
+						+ i + ".bmp"));
 				System.out.println("Done " + i);
 			}
-			visited[X-1]=1;foundpiece=1;
-			dfs(X-1);
-			for(int i=0; i<N; i++)System.out.print (visited[i]+" ");
-//			e = (int[][]) foundEdge.get(X - 1);
-//			int chose=-1;
-//			for(int i=0; i<N;i++) {
-//				if(i==X-1) continue;
-//				e2 = (int[][]) foundEdge.get(i);
-//				System.out.println(i+1);
-//				if(differof()) chose=i;
-//			}
-//			if(chose>-1) visited[chose]=1;
+			foundpiece = 1;
+			visited[rX-1][cX-1]=X;
+			used[X-1]=1;
+			dfs(X - 1,rX-1,cX-1);
+			// for(int i=0; i<N; i++)System.out.print (visited[i]+" ");
+
+			// e = (int[][]) foundEdge.get(X - 1);
+			// int chose=-1;
+			// // for(int i=0; i<N;i++) {
+			// int i=7;
+			// // if(i==X-1) continue;
+			// e2 = (int[][]) foundEdge.get(i);
+			// System.out.println(i+1);
+			// if(differof()) chose=i;
+			// // }
+
+			// if(chose>-1) visited[chose]=1;
 			// System.out.println();
 			//
 			// System.out.println();
@@ -206,22 +263,78 @@ public class FrameMain extends JFrame {
 			e.printStackTrace();
 		}
 	}
-	int foundpiece=0;
-	public void dfs(int theX) {
+
+	int foundpiece = 0;
+	int totalPoint = 0;
+	int tmpPoint = 0;
+	int[] dx= {1,-1,0,0};
+	int[] dy={0,0,1,-1};
+	public void dfs(int theX,int xp,int yp) {
+		if (foundpiece >= R * C) {
+			if(tmpPoint>totalPoint){				
+				totalPoint = tmpPoint;
+				for (int i = 0; i < R; i++){				
+					for (int j = 0; j < C; j++)
+						System.out.print(visited[i][j] + " ");
+					System.out.println();
+				}
+				System.out.println(totalPoint);
+			}
+			return;
+		}
+		// int maxtmp=0;
 		e = (int[][]) foundEdge.get(theX);
-		int chose=-1;
-		for(int i=0; i<N;i++) {
-			if(i==theX || visited[i]>0) continue;
-			e2 = (int[][]) foundEdge.get(i);
-//			System.out.println(i+1);
-			if(differof()) chose=i;
+		// int chose=-1;
+		
+		for(int i=0;i<4;i++){
+			if(xp+dx[i]>=0 && xp+dx[i]<R && yp+dy[i]>=0 && yp+dy[i]<C){
+				if(visited[xp+dx[i]][yp+dy[i]]==0){					
+					for (int j = 0; j < N;j++) {
+						if (j == theX || used[j] > 0)continue;	
+						e2 = (int[][]) foundEdge.get(j);
+						int tmp = differof();
+						foundpiece++;
+						used[j] = foundpiece;
+						visited[xp+dx[i]][yp+dy[i]]=j+1;
+						tmpPoint += tmp;
+						dfs(j,xp+dx[i],yp+dy[i]);
+						tmpPoint -= tmp;
+						foundpiece--;
+						used[j] = 0;					
+						visited[xp+dx[i]][yp+dy[i]]=0;
+						
+					}
+				}
+			}
 		}
-		if(chose>-1) {
-			foundpiece++;
-			visited[chose]=foundpiece;
-			if(foundpiece<R*C)dfs(chose);
-		}
+		
+//		for (int i = 0; i < N; i++) {
+//			if (i == theX || visit[i] > 0)
+//				continue;
+//			e2 = (int[][]) foundEdge.get(i);
+//			// System.out.println(i+1);
+//			int tmp = differof();
+//			foundpiece++;
+//			visited[i] = foundpiece;
+////			if (totalPoint < tmpPoint + tmp) {
+//				tmpPoint += tmp;
+////				dfs(i);
+//				tmpPoint -= tmp;
+//				foundpiece--;
+//				visited[i] = 0;
+////			}
+//			// if(tmp>0) {chose=i;maxtmp=tmp;}
+//		}
+		// if(chose>-1) {
+		// foundpiece++;
+		// visited[chose]=foundpiece;
+		// if(foundpiece<R*C && totalPoint<tmpPoint+maxtmp){
+		// tmpPoint+=maxtmp;
+		// dfs(chose);
+		// }
+		// }
 	}
+
 	public void checkAnImage(File f) throws Exception {
 
 		// matrix = create2DIntMatrixFromFile(f.toPath());
@@ -246,16 +359,19 @@ public class FrameMain extends JFrame {
 		detector.process();
 		BufferedImage edges = detector.getEdgesImage();
 		foundEdge.add(BItoA(edges));
-		// File imageFile = new File("D:\\ThiSinh\\input\"+numberTest+\"\\" + X +
+		// File imageFile = new File("D:\\ThiSinh\\input\"+numberTest+\"\\" + X
+		// +
 		// ".bmp");
 		Image i = edges;// ImageIO.read(imageFile);
 		ImageIcon image = new ImageIcon(i);
 		JLabel imageLabel = new JLabel();
-		this.add(imageLabel);
-		this.setLayout(new GridLayout(3, 3));
+		contentP.add(imageLabel);
+
+		// this.getContentPane().setLayout(new GridLayout(3, 3));
 		imageLabel.setLocation(0, 0);
-		imageLabel.setSize(250, 250);
-		ImageIcon imageIcon = new ImageIcon(image.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH));
+		imageLabel.setSize(150, 150);
+		ImageIcon imageIcon = new ImageIcon(image.getImage().getScaledInstance(
+				150, 150, Image.SCALE_SMOOTH));
 		imageLabel.setIcon(imageIcon);
 		imageLabel.setVisible(true);
 	}
@@ -288,7 +404,8 @@ public class FrameMain extends JFrame {
 	public void readInfo() {
 		Scanner scanner;
 		try {
-			scanner = new Scanner(new File("D:\\ThiSinh\\input" + numberTest + "\\info.txt"));
+			scanner = new Scanner(new File("D:\\ThiSinh\\input" + numberTest
+					+ "\\info.txt"));
 			int[] t = new int[100];
 			int i = 0;
 			while (scanner.hasNextInt()) {
@@ -319,15 +436,16 @@ public class FrameMain extends JFrame {
 
 	}
 
-	static public int[][] create2DIntMatrixFromFile(Path path) throws IOException {
-		return Files.lines(path).map((l) -> l.trim().split("\\s+"))
-				.map((sa) -> Stream.of(sa).mapToInt(Integer::parseInt).toArray()).toArray(int[][]::new);
+	static public int[][] create2DIntMatrixFromFile(Path path)
+			throws IOException {
+		return Files
+				.lines(path)
+				.map((l) -> l.trim().split("\\s+"))
+				.map((sa) -> Stream.of(sa).mapToInt(Integer::parseInt)
+						.toArray()).toArray(int[][]::new);
 	}
 
 	public static void main(String args[]) {
 		FrameMain f = new FrameMain();
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setSize(1480, 820);
-//		f.setVisible(true);
 	}
 }
