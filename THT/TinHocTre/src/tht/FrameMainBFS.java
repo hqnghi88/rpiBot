@@ -23,7 +23,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class FrameMainBFS extends JFrame {
-	public int numberTest = 0;
+	public int numberTest = 1;
 	public int N, K, R, C, rotate, X, rX, cX;
 
 	CannyEdgeDetector detector = new CannyEdgeDetector();
@@ -42,112 +42,182 @@ public class FrameMainBFS extends JFrame {
 
 	public int around(int[][] e, int[][] e2, int f, int fixed, int u) {
 		int count = 0;
-		int thres = 5;
+		int thres = 1;
+		int i = 0;
 		int V;
 		if (f == 0) {
-			for (int i = 0; i < thres; i++) {
-				if (u - i >= 0 && e[fixed][u - i] == -1) {
-					count++;
-				}
+			V = e[fixed][u];
+			i = 0;
+			while (i <= thres && u - i >= 0 && e[fixed][u - i] == V) {
+				i++;
+				count++;
 			}
-			for (int i = 1; i < thres; i++) {
-				if (u + i < K && e[fixed][u + i] == -1) {
-					count++;
-				}
+			i = 1;
+			while (i <= thres && u + i < K && e[fixed][u + i] == V) {
+				i++;
+				count++;
 			}
 		}
 		if (f == 1) {
-			for (int i = 0; i < thres; i++) {
-				if (u - i >= 0 && e[u - i][fixed] == -1) {
-					count++;
-				}
+			V = e[u][fixed];
+			i = 0;
+			while (i <= thres && u - i >= 0 && e[u - i][fixed] == V) {
+				i++;
+				count++;
 			}
-			for (int i = 1; i < thres; i++) {
-				if (u + i < K && e[u + i][fixed] == -1) {
-					count++;
-				}
+			i = 1;
+			while (i <= thres && u + i < K && e[u + i][fixed] == V) {
+				i++;
+				count++;
 			}
 		}
 		if (f == 2) {
-			for (int i = 0; i < thres; i++) {
-				if (u - i >= 0 && e2[fixed][u - i] == -1) {
-					count++;
-				}
+			V = e2[fixed][u];
+			i = 0;
+			while (i <= thres && u - i >= 0 && e2[fixed][u - i] == V) {
+				i++;
+				count++;
 			}
-			for (int i = 1; i < thres; i++) {
-				if (u + i < K && e2[fixed][u + i] == -1) {
-					count++;
-				}
+			i = 1;
+			while (i <= thres && u + i < K && e2[fixed][u + i] == V) {
+				i++;
+				count++;
 			}
 		}
 		if (f == 3) {
-			for (int i = 0; i < thres; i++) {
-				if (u - i >= 0 && e2[u - i][fixed] == -1) {
-					count++;
-				}
+			V = e2[u][fixed];
+			i = 0;
+			while (i <= thres && u - i >= 0 && e2[u - i][fixed] == V) {
+				i++;
+				count++;
 			}
-			for (int i = 1; i < thres; i++) {
-				if (u + i < K && e2[u + i][fixed] == -1) {
-					count++;
-				}
+			i = 1;
+			while (i <= thres && u + i < K && e2[u + i][fixed] == V) {
+				i++;
+				count++;
 			}
 		}
 		return count;
 	}
-	
 
 	public int around2(int[][] e, int[][] e2, int f, int fixed, int u) {
 		int count = 0;
 		int thres = 20;
+		int i = 0;
 		if (f == 0) {
-			for (int i = 0; i < thres; i++) {
-				if (u - i >= 0 && e[fixed][u - i] != -1) {
-					count++;
-				}
+			i = 0;
+			while (i < thres && u - i >= 0 && e[fixed][u - i] != -1) {
+				i++;
+				count++;
 			}
-			for (int i = 1; i < thres; i++) {
-				if (u + i < K && e[fixed][u + i] != -1) {
-					count++;
-				}
+			i = 1;
+			while (i < thres && u + i < K && e[fixed][u + i] != -1) {
+				i++;
+				count++;
 			}
 		}
 		if (f == 1) {
-			for (int i = 0; i < thres; i++) {
-				if (u - i >= 0 && e[u - i][fixed] != -1) {
-					count++;
-				}
+			i = 0;
+			while (i < thres && u - i >= 0 && e[u - i][fixed] != -1) {
+				i++;
+				count++;
 			}
-			for (int i = 1; i < thres; i++) {
-				if (u + i < K && e[u + i][fixed] != -1) {
-					count++;
-				}
+			i = 1;
+			while (i < thres && u + i < K && e[u + i][fixed] != -1) {
+				i++;
+				count++;
 			}
 		}
 		if (f == 2) {
-			for (int i = 0; i < thres; i++) {
-				if (u - i >= 0 && e2[fixed][u - i] != -1) {
-					count++;
-				}
+			i = 0;
+			while (i < thres && u - i >= 0 && e2[fixed][u - i] != -1) {
+				i++;
+				count++;
 			}
-			for (int i = 1; i < thres; i++) {
-				if (u + i < K && e2[fixed][u + i] != -1) {
-					count++;
-				}
+			i = 1;
+			while (i < thres && u + i < K && e2[fixed][u + i] != -1) {
+				i++;
+				count++;
 			}
 		}
 		if (f == 3) {
-			for (int i = 0; i < thres; i++) {
-				if (u - i >= 0 && e2[u - i][fixed] != -1) {
-					count++;
-				}
+			i = 0;
+			while (i < thres && u - i >= 0 && e2[u - i][fixed] != -1) {
+				i++;
+				count++;
 			}
-			for (int i = 1; i < thres; i++) {
-				if (u + i < K && e2[u + i][fixed] != -1) {
-					count++;
-				}
+			i = 1;
+			while (i < thres && u + i < K && e2[u + i][fixed] != -1) {
+				i++;
+				count++;
 			}
 		}
 		return count;
+	}
+
+	public int[] differof2(int[][] e, int[][] e2, int direction) {
+		int[] sum = new int[16];
+		for (int i = 0; i < 16; i++)
+			sum[i] = 0;
+		int bound = 7;
+		int rthres = 1;
+		for (int u = bound; u < K-bound; u++) {
+			if (direction == 0) {
+				if (Math.abs(e[bound][u] - e2[bound][K - u - 1]) <= rthres)
+					sum[0]++;
+				if (Math.abs(e[bound][u] - e2[K - bound - 1][u]) <= rthres)
+					sum[1]++;
+				if (Math.abs(e[bound][u] - e2[u][bound]) <= rthres)
+					sum[2]++;
+				if (Math.abs(e[bound][u] - e2[K - u - 1][K - bound - 1]) <= rthres)
+					sum[3]++;
+			}
+
+			if (direction == 1) {
+				if (Math.abs(e[K - bound - 1][u] - e2[bound][u]) <= rthres)
+					sum[4]++;
+				if (Math.abs(e[K - bound - 1][u] - e2[K - bound - 1][K - u - 1]) <= rthres)
+					sum[5]++;
+				if (Math.abs(e[K - bound - 1][u] - e2[K - u - 1][bound]) <= rthres)
+					sum[6]++;
+				if (Math.abs(e[K - bound - 1][u] - e2[u][K - bound - 1]) <= rthres)
+					sum[7]++;
+			}
+
+			if (direction == 2) {
+				if (Math.abs(e[u][bound] - e2[bound][u]) <= rthres)
+					sum[8]++;
+				if (Math.abs(e[u][bound] - e2[K - bound - 1][K - u - 1]) <= rthres)
+					sum[9]++;
+				if (Math.abs(e[u][bound] - e2[K - u - 1][bound]) <= rthres)
+					sum[10]++;
+				if (Math.abs(e[u][bound] - e2[u][K - bound - 1]) <= rthres)
+					sum[11]++;
+			}
+
+			if (direction == 3) {
+				if (Math.abs(e[u][K - bound - 1] - e2[bound][u]) <= rthres)
+					sum[12]++;
+				if (Math.abs(e[u][K - bound - 1] - e2[K - bound - 1][K - u - 1]) <= rthres)
+					sum[13]++;
+				if (Math.abs(e[u][K - bound - 1] - e2[K - u - 1][bound]) <= rthres)
+					sum[14]++;
+				if (Math.abs(e[u][K - bound - 1] - e2[u][K - bound - 1]) <= rthres)
+					sum[15]++;
+			}
+		}
+		int ff = -999;
+		int r = 0;
+		for (int i = 0; i < 16; i++) {
+			if (sum[i] > ff) {
+				ff = sum[i];
+//				r = rr[i];
+				 r=i;
+			}
+			// System.out.print(sum[i]+" ");
+		}
+		// System.out.println();
+		return new int[] { ff, r };
 	}
 
 	public int[] differof(int[][] e, int[][] e2, int direction) {
@@ -155,7 +225,7 @@ public class FrameMainBFS extends JFrame {
 		for (int i = 0; i < 16; i++)
 			sum[i] = 0;
 		int bound = 7;
-		int rthres = 1;
+		int rthres = 0;
 		for (int u = 0; u < K; u++) {
 			if (direction == 0) {
 				if (around(e, e2, 0, bound, u) > rthres && around(e, e2, 2, bound, K - u - 1) > rthres)
@@ -202,59 +272,75 @@ public class FrameMainBFS extends JFrame {
 			}
 		}
 
-		rthres = 10;
-		for (int u = 0; u < K; u++) {
-			if (direction == 0) {
-				if (around2(e, e2, 0, bound, u) > rthres && around2(e, e2, 2, bound, K - u - 1) > rthres)
-					sum[0]++;
-				if (around2(e, e2, 0, bound, u) > rthres && around2(e, e2, 2, K - bound - 1, u) > rthres)
-					sum[1]++;
-				if (around2(e, e2, 0, bound, u) > rthres && around2(e, e2, 3, bound, u) > rthres)
-					sum[2]++;
-				if (around2(e, e2, 0, bound, u) > rthres && around2(e, e2, 3, K - bound - 1, K - u - 1) > rthres)
-					sum[3]++;
-			}
-
-			if (direction == 1) {
-				if (around2(e, e2, 0, K - bound - 1, u) > rthres && around2(e, e2, 2, bound, u) > rthres)
-					sum[4]++;
-				if (around2(e, e2, 0, K - bound - 1, u) > rthres && around2(e, e2, 2, K - bound - 1, K - u - 1) > rthres)
-					sum[5]++;
-				if (around2(e, e2, 0, K - bound - 1, u) > rthres && around2(e, e2, 3, bound, K - u - 1) > rthres)
-					sum[6]++;
-				if (around2(e, e2, 0, K - bound - 1, u) > rthres && around2(e, e2, 3, K - bound - 1, u) > rthres)
-					sum[7]++;
-			}
-
-			if (direction == 2) {
-				if (around2(e, e2, 1, bound, u) > rthres && around2(e, e2, 2, bound, u) > rthres)
-					sum[8]++;
-				if (around2(e, e2, 1, bound, u) > rthres && around2(e, e2, 2, K - bound - 1, K - u - 1) > rthres)
-					sum[9]++;
-				if (around2(e, e2, 1, bound, u) > rthres && around2(e, e2, 3, bound, K - u - 1) > rthres)
-					sum[10]++;
-				if (around2(e, e2, 1, bound, u) > rthres && around2(e, e2, 3, K - bound - 1, u) > rthres)
-					sum[11]++;
-			}
-
-			if (direction == 3) {
-				if (around2(e, e2, 1, K - bound - 1, u) > rthres && around2(e, e2, 2, bound, K - u - 1) > rthres)
-					sum[12]++;
-				if (around2(e, e2, 1, K - bound - 1, u) > rthres && around2(e, e2, 2, K - bound - 1, u) > rthres)
-					sum[13]++;
-				if (around2(e, e2, 1, K - bound - 1, u) > rthres && around2(e, e2, 3, bound, u) > rthres)
-					sum[14]++;
-				if (around2(e, e2, 1, K - bound - 1, u) > rthres && around2(e, e2, 3, K - bound - 1, K - u - 1) > rthres)
-					sum[15]++;
-			}
-		}
+		// rthres = 20;
+		// for (int u = 0; u < K; u++) {
+		// if (direction == 0) {
+		// if (around2(e, e2, 0, bound, u) > rthres && around2(e, e2, 2, bound, K - u -
+		// 1) > rthres)
+		// sum[0]++;
+		// if (around2(e, e2, 0, bound, u) > rthres && around2(e, e2, 2, K - bound - 1,
+		// u) > rthres)
+		// sum[1]++;
+		// if (around2(e, e2, 0, bound, u) > rthres && around2(e, e2, 3, bound, u) >
+		// rthres)
+		// sum[2]++;
+		// if (around2(e, e2, 0, bound, u) > rthres && around2(e, e2, 3, K - bound - 1,
+		// K - u - 1) > rthres)
+		// sum[3]++;
+		// }
+		//
+		// if (direction == 1) {
+		// if (around2(e, e2, 0, K - bound - 1, u) > rthres && around2(e, e2, 2, bound,
+		// u) > rthres)
+		// sum[4]++;
+		// if (around2(e, e2, 0, K - bound - 1, u) > rthres && around2(e, e2, 2, K -
+		// bound - 1, K - u - 1) > rthres)
+		// sum[5]++;
+		// if (around2(e, e2, 0, K - bound - 1, u) > rthres && around2(e, e2, 3, bound,
+		// K - u - 1) > rthres)
+		// sum[6]++;
+		// if (around2(e, e2, 0, K - bound - 1, u) > rthres && around2(e, e2, 3, K -
+		// bound - 1, u) > rthres)
+		// sum[7]++;
+		// }
+		//
+		// if (direction == 2) {
+		// if (around2(e, e2, 1, bound, u) > rthres && around2(e, e2, 2, bound, u) >
+		// rthres)
+		// sum[8]++;
+		// if (around2(e, e2, 1, bound, u) > rthres && around2(e, e2, 2, K - bound - 1,
+		// K - u - 1) > rthres)
+		// sum[9]++;
+		// if (around2(e, e2, 1, bound, u) > rthres && around2(e, e2, 3, bound, K - u -
+		// 1) > rthres)
+		// sum[10]++;
+		// if (around2(e, e2, 1, bound, u) > rthres && around2(e, e2, 3, K - bound - 1,
+		// u) > rthres)
+		// sum[11]++;
+		// }
+		//
+		// if (direction == 3) {
+		// if (around2(e, e2, 1, K - bound - 1, u) > rthres && around2(e, e2, 2, bound,
+		// K - u - 1) > rthres)
+		// sum[12]++;
+		// if (around2(e, e2, 1, K - bound - 1, u) > rthres && around2(e, e2, 2, K -
+		// bound - 1, u) > rthres)
+		// sum[13]++;
+		// if (around2(e, e2, 1, K - bound - 1, u) > rthres && around2(e, e2, 3, bound,
+		// u) > rthres)
+		// sum[14]++;
+		// if (around2(e, e2, 1, K - bound - 1, u) > rthres && around2(e, e2, 3, K -
+		// bound - 1, K - u - 1) > rthres)
+		// sum[15]++;
+		// }
+		// }
 		int ff = -999;
 		int r = 0;
 		for (int i = 0; i < 16; i++) {
 			if (sum[i] > ff) {
 				ff = sum[i];
-//				r = rr[i];
-				r=i;
+				// r = rr[i];
+				r = i;
 			}
 			// System.out.print(sum[i]+" ");
 		}
@@ -262,9 +348,9 @@ public class FrameMainBFS extends JFrame {
 		return new int[] { ff, r };
 	}
 
-	int[] rr = { 180, 0, 90, 270,
+	int[] rr = {0, 180, 0, 90, 270,
 			// 0, 180, 270, 90,
-			0, 180, 90, 270, 270, 90, 180, 0, 270, 90, 0, 180 };
+			0, 270, 90, 180, 270, 270, 180, 0, 270, 90, 0, 180 };
 	public JPanel contentP;
 
 	public FrameMainBFS() {
@@ -297,7 +383,7 @@ public class FrameMainBFS extends JFrame {
 				BufferedImage im = (BufferedImage) foundEdgeImg.get(res_marked[i][j] - 1);// ImageIO.read(imageFile);
 				int w = im.getWidth();
 				int h = im.getHeight();
-				double angle = (Math.PI / 2) * (res_rot[i][j] / 90);
+				double angle = (Math.PI / 2) * (rr[res_rot[i][j]] / 90);
 				AffineTransform tx = new AffineTransform();
 				tx.rotate(angle, w / 2, h / 2);// (radian,arbit_X,arbit_Y)
 
@@ -309,8 +395,8 @@ public class FrameMainBFS extends JFrame {
 
 				// this.getContentPane().setLayout(new GridLayout(3, 3));
 				imageLabel.setLocation(0, 0);
-				imageLabel.setSize(250, 250);
-				ImageIcon imageIcon = new ImageIcon(image.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH));
+				imageLabel.setSize(150, 150);
+				ImageIcon imageIcon = new ImageIcon(image.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
 				imageLabel.setIcon(imageIcon);
 				imageLabel.setVisible(true);
 			}
@@ -395,6 +481,8 @@ public class FrameMainBFS extends JFrame {
 
 	public void dfs(int theX, int xp, int yp) {
 
+//		if (totalPoint > 0)
+//			return;
 		if (foundpiece >= R * C) {
 			if (tmpPoint > totalPoint) {
 				totalPoint = tmpPoint;
@@ -424,34 +512,29 @@ public class FrameMainBFS extends JFrame {
 			if (xp + dx[i] >= 0 && xp + dx[i] < R && yp + dy[i] >= 0 && yp + dy[i] < C) {
 				if (marked[xp + dx[i]][yp + dy[i]] == 0) {
 					// int mx = -1, xxx = -1, rr = 0;
+					int maxtmp = -99, jjj = 0, rott = 0;
 					for (int j = 0; j < N; j++) {
 						if (j == theX || used[j] > 0)
 							continue;
 						int[][] e2 = (int[][]) foundEdge.get(j);
-						int[] tmp = differof(e, e2, i);
-						foundpiece++;
-						used[j] = foundpiece;
-						rot[xp + dx[i]][yp + dy[i]] = tmp[1];
-						marked[xp + dx[i]][yp + dy[i]] = j + 1;
-						tmpPoint += tmp[0];
+						int[] tmp = differof2(e, e2, i);
 						int tmppoint2 = 0;
 						for (int ii = 0; ii < 4; ii++) {
 							int xxp = xp + dx[i] + dx[ii];
 							int yyp = yp + dy[i] + dy[ii];
 							if (xxp >= 0 && xxp < R && yyp >= 0 && yyp < C) {
 								if (marked[xxp][yyp] > 0 && marked[xxp][yyp] != theX + 1) {
-									int[] tmp2 = differof(e2, (int[][]) foundEdge.get(marked[xxp][yyp] - 1), i);
+									int[] tmp2 = differof2(e2, (int[][]) foundEdge.get(marked[xxp][yyp] - 1), ii);
 									tmppoint2 += tmp2[0];
 								}
 							}
 						}
-						tmpPoint += tmppoint2;
-						dfs(marked[xp + dx[i]][yp + dy[i]] - 1, xp + dx[i], yp + dy[i]);
-						marked[xp + dx[i]][yp + dy[i]] = 0;
-						used[j] = 0;
-						foundpiece--;
-						tmpPoint -= tmp[0];
-						tmpPoint -= tmppoint2;
+
+						if (tmp[0] + tmppoint2 > maxtmp) {
+							maxtmp = tmp[0] + tmppoint2;
+							rott = tmp[1];
+							jjj = j;
+						}
 
 						// if (tmp[0] >= mx) {
 						// mx = tmp[0];
@@ -459,6 +542,19 @@ public class FrameMainBFS extends JFrame {
 						// xxx = j;
 						// }
 					}
+
+					foundpiece++;
+					used[jjj] = foundpiece;
+					rot[xp + dx[i]][yp + dy[i]] = rott;// tmp[1];
+					marked[xp + dx[i]][yp + dy[i]] = jjj + 1;
+					tmpPoint += maxtmp;
+					// tmpPoint += tmppoint2;
+					dfs(marked[xp + dx[i]][yp + dy[i]] - 1, xp + dx[i], yp + dy[i]);
+					marked[xp + dx[i]][yp + dy[i]] = 0;
+					used[jjj] = 0;
+					foundpiece--;
+					tmpPoint -= maxtmp;
+					// tmpPoint -= tmppoint2;
 					// if (mx > -1) {
 					//
 					// }
@@ -553,18 +649,19 @@ public class FrameMainBFS extends JFrame {
 		// }
 		BufferedImage bufferImage2 = ImageIO.read(f);
 
-		detector.setLowThreshold(0.5f);
-		detector.setHighThreshold(1f);
-
-		detector.setSourceImage(bufferImage2);
-		detector.process();
-		BufferedImage edges = detector.getEdgesImage();
-		BufferedImage b = new BufferedImage(edges.getWidth(), edges.getHeight(), edges.getType());
-		Graphics g = b.getGraphics();
-		g.drawImage(edges, 0, 0, null);
-		g.dispose();
-		foundEdgeImg.add(b);
-		foundEdge.add(BItoA(edges));
+		// detector.setLowThreshold(0.5f);
+		// detector.setHighThreshold(1f);
+		//
+		// detector.setSourceImage(bufferImage2);
+		// detector.process();
+		// BufferedImage edges = detector.getEdgesImage();
+		// BufferedImage b = new BufferedImage(edges.getWidth(), edges.getHeight(),
+		// edges.getType());
+		// Graphics g = b.getGraphics();
+		// g.drawImage(edges, 0, 0, null);
+		// g.dispose();
+		foundEdgeImg.add(bufferImage2);
+		foundEdge.add(BItoA(bufferImage2));
 		// File imageFile = new File("D:\\ThiSinh\\input\"+numberTest+\"\\" + X
 		// +
 		// ".bmp");

@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class FrameMain extends JFrame {
-	public int numberTest = 0;
+	public int numberTest = 1;
 	public int N, K, R, C, rotate, X, rX, cX;
 
 	CannyEdgeDetector detector = new CannyEdgeDetector();
