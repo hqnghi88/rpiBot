@@ -416,7 +416,7 @@ public class FrameMainBFS extends JFrame {
 							continue;
 						int[][] e2 = (int[][]) foundEdge.get(j);
 						int[][] e2O = (int[][]) foundEdgeO.get(j);
-						int[] tmp = differof1(e, e2, i, 7, 0, 15);
+						int[] tmp = differof2(e, e2, i, 7, 0, 15);
 						// int[] tmp1 = differof1(e, e2, i, 7, 2);
 						int[] tmpO = differof2(eO, e2O, i, 0, 2, 1);
 						// int[] tmpO1 = differof1(eO, e2O, i, 0, 5);
@@ -427,7 +427,7 @@ public class FrameMainBFS extends JFrame {
 							int yyp = yp + dy[i] + dy[ii];
 							if (xxp >= 0 && xxp < R && yyp >= 0 && yyp < C) {
 								if (marked[xxp][yyp] > 0 && marked[xxp][yyp] != theX + 1) {
-									int[] tmp2 = differof1(e2, (int[][]) foundEdge.get(marked[xxp][yyp] - 1), ii, 7, 0,
+									int[] tmp2 = differof2(e2, (int[][]) foundEdge.get(marked[xxp][yyp] - 1), ii, 7, 0,
 											15);
 									// int[] tmp3 = differof1(e2, (int[][]) foundEdge.get(marked[xxp][yyp] - 1), ii,
 									// 7, 2);
@@ -608,13 +608,13 @@ public class FrameMainBFS extends JFrame {
 	}
 
 	public static void main(String args[]) {
-		int i = 1;
-		// for (i = 15; i < 26; i++) {
+		int i = 9;
+//		 for (i = 15; i < 26; i++) {
 		FrameMainBFS f = new FrameMainBFS();
 		// if(i==15)
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.numberTest = i;
 		f.process();
-		// }
+//		 }
 	}
 }
