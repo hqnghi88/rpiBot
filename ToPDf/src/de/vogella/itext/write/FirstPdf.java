@@ -23,10 +23,10 @@ public class FirstPdf {
 			if (listOfFiles[i].isFile()) {
 				String fname1=listOfFiles[i].getName();
 
-//				if(fname.contains(" - marker.pdf")) {
-//					listOfFiles[i].delete();
-//				}
-				if(!fname1.contains(" - marker.pdf")) {
+				if(fname1.toLowerCase().contains(" - marker.pdf")) {
+					listOfFiles[i].delete();
+				}
+				if(!fname1.toLowerCase().contains(" - marker.pdf")) {
 					String fname=fname1.replace(".pdf", " - marker.pdf");
 					System.out.println("File " + fname);
 					Document document = new Document();
@@ -38,13 +38,15 @@ public class FirstPdf {
 //						  Font font =FontFactory.getFont("sanskrit", "Identity-H", true); 
 //						  Chunk chunk = new Chunk(fname1,font); 
 //						document.add(new Paragraph(chunk));
-						Paragraph p = new Paragraph(fname1, new Font(bf, 22));
+						Paragraph p = new Paragraph(fname1.replace(".pdf",""), new Font(bf, 22)); 
 						document.add(p);
 						document.close();
 						writer.close();
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
+				}else {
+					System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 				}
 			} 
 
