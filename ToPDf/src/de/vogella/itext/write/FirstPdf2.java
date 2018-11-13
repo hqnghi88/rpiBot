@@ -32,8 +32,7 @@ public class FirstPdf2 {
 			for (int i = 0; i < fpdf.a.size() / 2; i++) {
 				String title = "" + fpdf.a.get((i * 2));
 				String content = "" + fpdf.a.get((i * 2) + 1);
-				System.out.println(title);
-				System.out.println(content);
+				System.out.println(title+"\t"+content.replace("\n", "\\n"));
 				// if (listOfFiles[i].isFile()) {
 				// String fname1=listOfFiles[i].getName();
 
