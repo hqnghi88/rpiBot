@@ -50,9 +50,9 @@ public class FirstPdf2 {
 				// Font font =FontFactory.getFont("sanskrit", "Identity-H", true);
 				// Chunk chunk = new Chunk(fname1,font);
 				// document.add(new Paragraph(chunk));
-				Paragraph p0 = new Paragraph("\n\n\n", new Font(bf, 28, Font.BOLD));
+				Paragraph p0 = new Paragraph("\n\n\n\n\n\n", new Font(bf, 28, Font.BOLD));
 				document.add(p0);
-				Paragraph p1 = new Paragraph(title, new Font(bf, 28, Font.BOLD));
+				Paragraph p1 = new Paragraph(title+"\n\n", new Font(bf, 28, Font.BOLD));
 				p1.setAlignment(Element.ALIGN_CENTER);
 				document.add(p1);
 				Paragraph p2 = new Paragraph(content, new Font(bf, 22));
@@ -106,7 +106,7 @@ public class FirstPdf2 {
 		a.add("Exh.1.3-02");
 		a.add("Phản hồi từ phía người sử dụng lao động");
 		a.add("Exh.2.1-01");
-		a.add("Trang web \nhttp://http://www.cit.ctu.edu.vn/index.php/dao-t-o/chuong-trinh-d-i-h-c");
+		a.add("Trang web \nhttp://www.cit.ctu.edu.vn/index.php/dao-t-o/chuong-trinh-d-i-h-c");
 		a.add("Exh.2.1-02");
 		a.add("Trang web https://tuyensinh.ctu.edu.vn");
 		a.add("Exh.2.1-03");
@@ -164,9 +164,9 @@ public class FirstPdf2 {
 		a.add("Exh.4.2-07");
 		a.add("Đề cương chi tiết \nhọc phần Niên luận ngành KTPM (CT250)");
 		a.add("Exh.4.2-08");
-		a.add("Phiếu đánh giá kỹ năng làm việc nhóm niên luận ngành KTPM");
+		a.add("Phiếu đánh giá kỹ năng làm việc nhóm \nniên luận ngành KTPM");
 		a.add("Exh.4.2-09");
-		a.add("Phiếu đánh giá kỹ năng thuyết trình nhóm niên luận ngành KTPM");
+		a.add("Phiếu đánh giá kỹ năng thuyết trình nhóm \nniên luận ngành KTPM");
 		a.add("Exh.4.2-10");
 		a.add("Danh sách phân nhóm đề tài niên luận ngành KTPM");
 		a.add("Exh.4.2-11");
@@ -178,7 +178,7 @@ public class FirstPdf2 {
 		a.add("Exh.4.2-14");
 		a.add("Nội dung công tác đi thăm sinh viên thực tập");
 		a.add("Exh.4.2-15");
-		a.add("Thông báo \ntuyển sinh viên thực tập thực tế \ncủa doanh nghiệp");
+		a.add("Thông báo tuyển sinh viên thực tập thực tế \ncủa doanh nghiệp");
 		a.add("Exh.4.2-16");
 		a.add("Đề cương chi tiết \nhọc phần Phân tích thiết kế thuật toán (CT174)");
 		a.add("Exh.4.2-17");
@@ -284,7 +284,7 @@ public class FirstPdf2 {
 		a.add("Exh.6.3-04");
 		a.add("Quyết định kéo dài thời gian làm việc \ncủa thầy Lê Quyết Thắng");
 		a.add("Exh.6.4-01");
-		a.add("Thông tư liên tịch số 36/2014/TTLT-BGDĐT-BNV \ncủa Bộ Nội vụ-Bộ Giáo dục và Đào tạo : \nQuy định mã số và tiêu chuẩn chức danh nghề nghiệp viên chức giảng dạy \ntrong các cơ sở giáo dục đại học công lập");
+		a.add("Thông tư liên tịch số 36/2014/TTLT-BGDĐT-BNV \ncủa Bộ Nội vụ-Bộ Giáo dục và Đào tạo : \nQuy định mã số và tiêu chuẩn chức danh nghề nghiệp \nviên chức giảng dạy \ntrong các cơ sở giáo dục đại học công lập");
 		a.add("Exh.6.4-02");
 		a.add("Phiếu đăng ký kế hoạch công tác");
 		a.add("Exh.6.4-03");
@@ -308,7 +308,7 @@ public class FirstPdf2 {
 		a.add("Exh.6.5-03");
 		a.add("Quyết định hỗ trợ kinh phí tham dự hội nghị quốc tế");
 		a.add("Exh.6.5-04");
-		a.add("Danh sách seminar của  bộ môn");
+		a.add("Danh sách seminar của bộ môn");
 		a.add("Exh.6.5-05");
 		a.add("Chứng chỉ tham gia hội thảo");
 		a.add("Exh.6.5-06");
@@ -344,7 +344,7 @@ public class FirstPdf2 {
 		a.add("Exh.8.1.1-01");
 		a.add("Quy chế tuyển sinh đại học, cao đẳng hệ chính quy");
 		a.add("Exh.8.1.1-02");
-		a.add("Thông tư sửa đổi, bổ sung \nquy chế thiTrung học phổ thông");
+		a.add("Thông tư sửa đổi, bổ sung \nquy chế thi Trung học phổ thông");
 		a.add("Exh.8.1.1-03");
 		a.add("Đề án tuyển sinh đại học chính quy trường ĐHCT 2018");
 		a.add("Exh.8.1.1-04");
@@ -434,7 +434,7 @@ public class FirstPdf2 {
 		a.add("Exh.10.5-02");
 		a.add("Quyết định phân bổ dự toán ngân sách năm 2018");
 		a.add("Exh.10.6-01");
-		a.add("Công văn 1276/BGDĐT-NG của Bộ GD-ĐT \nvề việc Hướng dẫn tổ chức lấy ý kiến phản hồi từ người học \nvề hoạt động giảng dạy của giảng viên");
+		a.add("Công văn 1276/BGDĐT-NG của Bộ GD-ĐT \nv/v Hướng dẫn tổ chức lấy ý kiến phản hồi từ người học \nvề hoạt động giảng dạy của giảng viên");
 		a.add("Exh.10.6-02");
 		a.add("Phiếu lấy ý kiến của sinh viên \nvề hoạt động giảng dạy của giáo viên");
 		a.add("Exh.10.6-03");
@@ -448,25 +448,25 @@ public class FirstPdf2 {
 		a.add("Exh.11.1-01");
 		a.add("Kết quả học tập học kỳ 2 năm học 2017-2018 \ncủa một lớp KTPM");
 		a.add("Exh.11.1-02");
-		a.add("Cam kết của sinh viên bị cảnh báo học vụ và kết quả học tập học kỳ 2 năm học 2016-2017");
+		a.add("Cam kết của sinh viên bị cảnh báo học vụ \nvà kết quả học tập học kỳ 2 \nnăm học 2016-2017");
 		a.add("Exh.11.1-03");
-		a.add("Công văn về việc kiểm tra kết quả học tập của sinh viên học kỳ 1 năm 2017-2018");
+		a.add("Công văn về việc kiểm tra kết quả học tập của sinh viên \nhọc kỳ 1 năm 2017-2018");
 		a.add("Exh.11.3-01");
-		a.add("Báo cáo tình hình việc làm của sinh viên sau 1 năm tốt nghiệp");
+		a.add("Báo cáo tình hình việc làm của sinh viên \nsau 1 năm tốt nghiệp");
 		a.add("Exh.11.3-02");
 		a.add("Bảng kế hoạch ngày hội việc làm năm 2018");
 		a.add("Exh.11.5-01");
 		a.add("Phiếu lấy ý kiến sinh viên tốt nghiệp năm 2017");
 		a.add("Exh.11.5-02");
-		a.add("Phiếu lấy ý kiến của người sử dụng lao động về CTĐT ngành KTPM năm 2018");
+		a.add("Phiếu lấy ý kiến của người sử dụng lao động \nvề CTĐT ngành KTPM năm 2018");
 		a.add("Exh.11.5-03");
-		a.add("Ý kiến phản hồi của sinh viên cho môn học CT171-Nhập môn Công nghệ phần mềm");
+		a.add("Ý kiến phản hồi của sinh viên \ncho môn học CT171-Nhập môn Công nghệ phần mềm");
 		a.add("Exh.11.5-01");
 		a.add("Phiếu lấy ý kiến sinh viên tốt nghiệp năm 2017");
 		a.add("Exh.11.5-02");
-		a.add("Phiếu lấy ý kiến của người sử dụng lao động về CTĐT ngành KTPM năm 2018");
+		a.add("Phiếu lấy ý kiến của người sử dụng lao động \nvề CTĐT ngành KTPM năm 2018");
 		a.add("Exh.11.5-03");
-		a.add("Ý kiến phản hồi của sinh viên cho môn học CT171-Nhập môn Công nghệ phần mềm");
+		a.add("Ý kiến phản hồi của sinh viên \ncho môn học CT171-Nhập môn Công nghệ phần mềm");
 
 	}
 }
